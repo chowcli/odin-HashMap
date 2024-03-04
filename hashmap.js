@@ -22,7 +22,7 @@ class HashMap {
     this.#buckets = new Array(this.#buckets.length * 2).fill(null);
 
     pairs.forEach(([key, value]) => {
-      const hashCode = this.hash(key);
+      const hashCode = this.#hash(key);
       if (hashCode < 0 || hashCode >= this.#buckets.length) {
         throw new Error("Trying to access index out of bound");
       }
@@ -33,7 +33,7 @@ class HashMap {
     });
   }
 
-  hash(key) {
+  #hash(key) {
     let hashCode = 0;
     const bucketLength = this.#buckets.length;
 
@@ -47,7 +47,7 @@ class HashMap {
   }
 
   set(key, value) {
-    const hashCode = this.hash(key);
+    const hashCode = this.#hash(key);
     if (hashCode < 0 || hashCode >= this.#buckets.length) {
       throw new Error("Trying to access index out of bound");
     }
@@ -71,21 +71,21 @@ class HashMap {
   }
 
   get(key) {
-    const bucket = this.#buckets[this.hash(key)];
+    const bucket = this.#buckets[this.#hash(key)];
     const findNode = bucket.find(key);
 
     return findNode ? findNode.value : null;
   }
 
   has(key) {
-    const bucket = this.#buckets[this.hash(key)];
+    const bucket = this.#buckets[this.#hash(key)];
     const findNode = bucket.find(key);
 
     return Boolean(findNode);
   }
 
   remove(key) {
-    const bucket = this.#buckets[this.hash(key)];
+    const bucket = this.#buckets[this.#hash(key)];
 
     if (bucket && bucket.find(key)) {
       bucket.remove(key);
@@ -161,3 +161,5 @@ class HashMap {
     return pairs;
   }
 }
+
+module.exports = HashMap;

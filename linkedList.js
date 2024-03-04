@@ -33,11 +33,13 @@ class LinkedList {
   // Remove node with correct key
   remove(key) {
     const removedNode = this.find(key);
+    if (!removedNode) return;
 
     if (removedNode === this.head) {
       this.head = this.head.next;
       if (!this.head) this.tail = null; // if the list after update is empty
       this.size--;
+      return;
     }
 
     let temp = this.head;
@@ -52,3 +54,32 @@ class LinkedList {
 }
 
 module.exports = LinkedList;
+
+// const list = new LinkedList();
+// list.append("banana", 22);
+// list.append("pineapple", 5);
+// list.append("apple", 35);
+// list.append("orange", 17);
+// list.append("coconut", 10);
+// list.append("kiwi", 2);
+// list.append("durian", 5);
+// list.append("cherry", 100);
+// list.append("pear", 25);
+// list.append("grape", 14);
+
+// console.log(list.find("banana"));
+// console.log(list.find("coconut"));
+// console.log(list.find("cherries"));
+// console.log(list.find("grapes"), "\n");
+
+// console.log("Head:", list.head);
+// console.log("Tail:", list.tail);
+// console.log("Size:", list.size, "\n");
+
+// list.remove("banana");
+// list.remove("apple");
+// list.remove("grape");
+
+// console.log("Head:", list.head);
+// console.log("Tail:", list.tail);
+// console.log("Size:", list.size, "\n");
